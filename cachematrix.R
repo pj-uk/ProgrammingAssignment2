@@ -1,7 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Programming Assignment 2 (peer assessed)
+## Provides functions for managing caching of matrix inverses.
+## Assumes matrix is invertible.
 
-## Write a short comment describing this function
+## makeCacheMatrix returns a cache object which we can use for querying the cache and computing
+## new cache entries (ie. inverses).
+## usage: 
+## cache <- makeCacheMatrix(x)
+## cache$setsolve(x)    - sets inverse in cache
+## cache$getsolve(x)    - looks in cache for previously computed inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
@@ -18,7 +24,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Returns inverse of given matrix, grabbing result from the cache instead of computing if possible
 
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
