@@ -18,23 +18,28 @@ makeCacheMatrix <- function(x = matrix()) {
     get <- function() x
     setsolve <- function(solve) m <<- solve
     getsolve <- function() m
+    ## Return a list of functions which can then be called using the cache object
     list(set = set, get = get,
          setsolve = setsolve,
          getsolve = getsolve)
 }
 
 
-## Returns inverse of given matrix, grabbing result from the cache instead of computing if possible
+## cacheSolve returns inverse of given matrix, grabbing result from the cache instead
+## of computing, if possible.
 
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     m <- x$getsolve()
+    ## If m is not null then we have successfully fetched result from the cache, so we return it.
     if(!is.null(m)) {
         message("getting cached data")
         return(m)
     }
+    ## If we reach this point, result was not cached so we compute it and add it to cache.
     data <- x$get()
     m <- solve(data, ...)
     x$setsolve(m)
+    ## Return m
     m
 }
